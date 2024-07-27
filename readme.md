@@ -30,7 +30,7 @@ This project aims to practice and learn the use of Node.js, Express, TypeScript,
     npm install
     ```
 
-4. For environment variables you can communicate with the project's creator.
+4. For environment variables you can communicate with the project's creator... [twitter](https://x.com/berdugopertuz)
 
 5. Start the server:
 
