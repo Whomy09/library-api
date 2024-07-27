@@ -27,4 +27,17 @@ export class User {
       lastName: user.lastName,
     };
   }
+
+  async getAll() {
+    const users = await this.db.find();
+
+    return users.map((user) => {
+      return {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        lastName: user.lastName,
+      };
+    });
+  }
 }

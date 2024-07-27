@@ -32,8 +32,20 @@ export const getById = async (req: Request, res: Response) => {
     }
 
     const user = await new User().getById(id);
-
     res.status(200).json(user);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};
+
+export const getAll = async (req: Request, res: Response) => {
+  try {
+    const users = await new User().getAll();
+    res.status(200).json(users);
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).json({ message: error.message });
