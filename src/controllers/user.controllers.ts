@@ -1,15 +1,39 @@
 import { User } from "@/models/user.model";
 import { Request, Response } from "express";
 import { IUser } from "@/schemas/userSchema";
+import mongoose from "mongoose";
 
 export const create = async (req: Request<{}, {}, IUser>, res: Response) => {
   try {
-    const user = await new User().create(req.body);
+    await new User().create(req.body);
 
     res.status(200).json({
-      user,
       message: "User successfully created",
     });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};
+
+export const getById = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id as string;
+
+    if (!id) {
+      throw new Error("ID is required");
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new Error("Invalid ID format");
+    }
+
+    const user = await new User().getById(id);
+
+    res.status(200).json(user);
   } catch (error) {
     if (error instanceof Error) {
       res.status(400).json({ message: error.message });
