@@ -2,13 +2,13 @@ import { User } from "@/models/user.model";
 import { Request, Response } from "express";
 import { IUser } from "@/schemas/userSchema";
 
-export const create = (req: Request<{}, {}, IUser>, res: Response) => {
+export const create = async (req: Request<{}, {}, IUser>, res: Response) => {
   try {
-    const user = req.body;
+    const user = await new User().create(req.body);
 
     res.status(200).json({
+      user,
       message: "User successfully created",
-      user: new User().create(user),
     });
   } catch (error) {
     if (error instanceof Error) {

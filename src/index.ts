@@ -1,6 +1,7 @@
 import "module-alias/register";
 
 import dotenv from "dotenv";
+import connectDB from "./config/db";
 import express, { Response } from "express";
 
 import userRouter from "@/routes/user.routes";
@@ -8,6 +9,8 @@ import userRouter from "@/routes/user.routes";
 dotenv.config({
   path: ".env.dev",
 });
+
+connectDB();
 
 const app = express();
 const port = process.env.PORT;
