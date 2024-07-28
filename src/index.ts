@@ -1,5 +1,6 @@
 import "module-alias/register";
 
+import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
 import express, { Response } from "express";
@@ -16,6 +17,7 @@ connectDB();
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
