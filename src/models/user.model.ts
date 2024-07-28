@@ -40,4 +40,8 @@ export class User {
       };
     });
   }
+
+  async update(id: string, user: Partial<IUser>) {
+    await this.db.findByIdAndUpdate(id, user)
+  }
 }

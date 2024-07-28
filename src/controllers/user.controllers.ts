@@ -54,3 +54,31 @@ export const getAll = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const update = async (
+  req: Request<{ id: string }, {}, Partial<IUser>>,
+  res: Response
+) => {
+  try {
+    const id = req.params.id;
+    const user = req.body;
+
+    if (!id) {
+      throw new Error("ID is required");
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new Error("Invalid ID format");
+    }
+
+    await new User().update(id, user);
+
+    res.status(200).json({ message: "User successfully updated" });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};

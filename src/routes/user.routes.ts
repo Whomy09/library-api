@@ -1,13 +1,20 @@
 import express from "express";
 import { validate } from "@/middlewares/validate";
-import { userSchema } from "@/schemas/userSchema";
+import { userSchema, userUpdateSchema } from "@/schemas/userSchema";
 
-import { create, getById, getAll } from "@/controllers/user.controllers";
+import {
+  create,
+  getById,
+  getAll,
+  update,
+} from "@/controllers/user.controllers";
 
 const router = express.Router();
 
-router.post("/", validate(userSchema), create);
-router.get("/:id", getById);
-router.get("/", getAll);
+router
+  .post("/", validate(userSchema), create)
+  .get("/:id", getById)
+  .get("/", getAll)
+  .patch("/:id", validate(userUpdateSchema), update);
 
 export default router;
