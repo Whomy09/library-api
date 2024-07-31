@@ -15,7 +15,7 @@ export class Book {
 
   async getById(id: string) {
     /**
-     * Note: The lean function returns a plain 
+     * Note: The lean function returns a plain
      * js object without metadata.
      */
     const book = await this.db.findById(id).lean();
@@ -23,12 +23,21 @@ export class Book {
     if (!book) {
       throw new Error("Book not found");
     }
- 
-    const { _id, ..._book } = book
+
+    const { _id, ..._book } = book;
 
     return {
       id: _id,
-      ..._book
-    }
+      ..._book,
+    };
+  }
+
+  async getAll() {
+    const books = await this.db.find().lean();
+
+    return books.map(({ _id, ...book }) => ({
+      id: _id,
+      ...book,
+    }));
   }
 }
