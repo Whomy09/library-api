@@ -44,4 +44,8 @@ export class Book {
   async update(id: string, book: Partial<IBook>) {
     await this.db.findByIdAndUpdate(id, book);
   }
+
+  async delete(id: string) {
+    await this.db.findByIdAndDelete(id);
+  }
 }
