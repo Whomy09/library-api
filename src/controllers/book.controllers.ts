@@ -84,3 +84,26 @@ export const update = async (
     }
   }
 };
+
+export const remove = async (req: Request<{ id: string }>, res: Response) => {
+  try {
+    const id = req.params.id;
+
+    if (!id) {
+      throw new Error("ID is required");
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new Error("Invalid ID format");
+    }
+
+    await new Book().delete(id);
+    res.status(200).json({ message: "Book successfully deleted" });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};
