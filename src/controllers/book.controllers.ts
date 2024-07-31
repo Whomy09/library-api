@@ -1,7 +1,7 @@
+import mongoose from "mongoose";
 import { Book } from "@/models/book.model";
 import { Request, Response } from "express";
 import { IBook } from "@/schemas/bookSchema";
-import mongoose from "mongoose";
 
 export const create = async (req: Request<{}, {}, IBook>, res: Response) => {
   try {

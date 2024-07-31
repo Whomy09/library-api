@@ -15,8 +15,8 @@ export class Book {
 
   async getById(id: string) {
     /**
-     * Note: The lean function returns 
-     * me a flat js object if metadata
+     * Note: The lean function returns a plain 
+     * js object without metadata.
      */
     const book = await this.db.findById(id).lean();
 
