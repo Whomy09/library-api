@@ -42,6 +42,10 @@ export class User {
   }
 
   async update(id: string, user: Partial<IUser>) {
-    await this.db.findByIdAndUpdate(id, user)
+    await this.db.findByIdAndUpdate(id, user);
+  }
+
+  async delete(id: string) {
+    await this.db.findByIdAndDelete(id);
   }
 }
