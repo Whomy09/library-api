@@ -8,7 +8,7 @@ export const userSchema = z.object({
 
 export const userUpdateSchema = z.object({
   name: z.string(),
-  lastName: z.string().min(1, "Last name is required"),
+  lastName: z.string(),
   email: z.string().email("Invalid email address")
 })
 

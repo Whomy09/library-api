@@ -40,4 +40,8 @@ export class Book {
       ...book,
     }));
   }
+
+  async update(id: string, book: Partial<IBook>) {
+    await this.db.findByIdAndUpdate(id, book);
+  }
 }
