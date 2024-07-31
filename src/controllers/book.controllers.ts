@@ -44,3 +44,16 @@ export const getById = async (
     }
   }
 };
+
+export const getAll = async (req: Request, res: Response) => {
+  try {
+    const books = await new Book().getAll();
+    res.status(200).json(books);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};
