@@ -12,4 +12,23 @@ export class Book {
   async create(book: IBook) {
     await new this.db(book).save();
   }
+
+  async getById(id: string) {
+    /**
+     * Note: The lean function returns a plain 
+     * js object without metadata.
+     */
+    const book = await this.db.findById(id).lean();
+
+    if (!book) {
+      throw new Error("Book not found");
+    }
+ 
+    const { _id, ..._book } = book
+
+    return {
+      id: _id,
+      ..._book
+    }
+  }
 }
