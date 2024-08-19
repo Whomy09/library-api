@@ -107,3 +107,22 @@ export const remove = async (req: Request<{ id: string }>, res: Response) => {
     }
   }
 };
+
+export const getByUser = async (
+  req: Request<{ userId: string }>,
+  res: Response
+) => {
+  try {
+    const { userId } = req.params;
+
+    const books = await new Book().getByUser(userId);
+
+    res.status(200).json(books);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: error });
+    }
+  }
+};
