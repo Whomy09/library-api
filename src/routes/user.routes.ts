@@ -7,14 +7,16 @@ import {
   getById,
   getAll,
   update,
+  remove,
 } from "@/controllers/user.controllers";
 
 const router = express.Router();
 
 router
-  .post("/", validate(userSchema), create)
-  .get("/:id", getById)
   .get("/", getAll)
+  .get("/:id", getById)
+  .delete("/:id", remove)
+  .post("/", validate(userSchema), create)
   .patch("/:id", validate(userUpdateSchema), update);
 
 export default router;

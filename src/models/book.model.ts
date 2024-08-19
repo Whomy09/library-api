@@ -44,4 +44,18 @@ export class Book {
   async update(id: string, book: Partial<IBook>) {
     await this.db.findByIdAndUpdate(id, book);
   }
+
+  async delete(id: string) {
+    await this.db.findByIdAndDelete(id);
+  }
+
+  async getByUser(userId: string) {
+    console.log(userId)
+    const books = await this.db.find({ userId: userId }).lean();
+
+    return books.map(({ _id, ...book }) => ({
+      id: _id,
+      ...book,
+    }));
+  }
 }

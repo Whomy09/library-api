@@ -36,4 +36,8 @@ export const MongoBookSchema: Schema<MongoBook> = new Schema({
     type: Number,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true
+  }
 });

@@ -7,14 +7,18 @@ import {
   getById,
   getAll,
   update,
+  remove,
+  getByUser
 } from "@/controllers/book.controllers";
 
 const router = express.Router();
 
 router
-  .post("/", validate(bookCreateSchema), create)
-  .get("/:id", getById)
   .get("/", getAll)
+  .get("/:id", getById)
+  .get("/by-user/:userId", getByUser)
+  .delete("/:id", remove)
+  .post("/", validate(bookCreateSchema), create)
   .patch("/:id", validate(bookUpdateSchema), update);
 
 export default router;
